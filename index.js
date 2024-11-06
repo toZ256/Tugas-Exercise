@@ -19,6 +19,7 @@ const books = [];
 function addBook(title, category, author, genre, price) {
   const book = new Book(title, category, author, genre, price);
   books.push(book);
+  console.clear();
   console.log(`Buku dengan judul '${title}' telah ditambah.`);
 }
 
@@ -26,8 +27,10 @@ function addBook(title, category, author, genre, price) {
 function searchBook(title) {
   const book = books.find((book) => book.title === title);
   if (book) {
+    console.clear();
     console.log(book);
   } else {
+    console.clear();
     console.log(`Buku dengan judul '${title}' tidak ditemukan.`);
   }
 }
@@ -37,8 +40,10 @@ function deleteBook(title) {
   const index = books.findIndex((book) => book.title === title);
   if (index !== -1) {
     books.splice(index, 1);
+    console.clear();
     console.log(`Buku dengan judul '${title}' telah dihapus.`);
   } else {
+    console.clear();
     console.log(`Buku dengan judul '${title}' tidak ditemukan.`);
   }
 }
@@ -46,9 +51,16 @@ function deleteBook(title) {
 // Define a function 'showBooks' that logs all books in the 'books' array to the console.
 function showBooks() {
   if (books.length === 0) {
+    console.clear();
     console.log("Tidak ada buku :(");
   } else {
-    books.forEach((book) => console.log(book));
+    console.clear();
+    console.log("Buku ditemukan: ");
+    books.forEach((book) =>
+      console.log(
+        `{ judul: '${book.title}', kategori: '${book.category}', penulis: '${book.author}', genre: '${book.genre}', harga: ${book.price} }`
+      )
+    );
   }
 }
 
@@ -66,7 +78,7 @@ function searchBookByPrice(price) {
 function getValidPrice() {
   let price;
   while (true) {
-    price = parseFloat(prompt("Enter price: "));
+    price = parseFloat(prompt("Masukkan harga buku: "));
     if (!isNaN(price) && price > 0) {
       return price;
     } else {
@@ -79,33 +91,33 @@ function getValidPrice() {
 function displayMenu() {
   while (true) {
     console.log("\nMenu:");
-    console.log("1. Add book");
-    console.log("2. Search book by title");
-    console.log("3. Delete book by title");
-    console.log("4. Show all books");
-    console.log("5. Search book by price");
-    console.log("6. Exit");
+    console.log("1. Tambah buku");
+    console.log("2. Cari buku berdasarkan judul");
+    console.log("3. Hapus buku berdasarkan judul");
+    console.log("4. Tampilkan semua buku");
+    console.log("5. Cari buku berdasarkan harga");
+    console.log("6. Keluar");
 
     // Prompt the user to enter a choice and perform the corresponding action, save the input in a variable 'choice'.
-    const choice = prompt("Enter your choice: ");
+    const choice = prompt("Masukkan pilihan(1-6): ");
 
     switch (choice) {
       case "1":
-        const title = prompt("Enter title: ");
-        const category = prompt("Enter category: ");
-        const author = prompt("Enter author: ");
-        const genre = prompt("Enter genre: ");
+        const title = prompt("Masukkan judul buku: ");
+        const category = prompt("Masukkan kategori buku: ");
+        const author = prompt("Masukkan penulis buku: ");
+        const genre = prompt("Masukkan genre buku: ");
         const price = getValidPrice();
         addBook(title, category, author, genre, price);
         break;
 
       case "2":
-        const searchTitle = prompt("Enter the title of the book to search: ");
+        const searchTitle = prompt("Masukkan judul buku yang ingin dicari: ");
         searchBook(searchTitle);
         break;
 
       case "3":
-        const deleteTitle = prompt("Enter the title of the book to delete: ");
+        const deleteTitle = prompt("Masukkan judul buku yang ingin dihapus: ");
         deleteBook(deleteTitle);
         break;
 
@@ -119,11 +131,11 @@ function displayMenu() {
         break;
 
       case "6":
-        console.log("Exiting the application.");
+        console.log("Keluar dari aplikasi.");
         return;
 
       default:
-        console.log("Invalid choice. Please try again.");
+        console.log("Pilihan salah. Silahkan pilih lagi!");
     }
   }
 }
